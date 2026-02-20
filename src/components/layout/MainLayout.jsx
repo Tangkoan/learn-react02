@@ -7,7 +7,7 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
   return {
@@ -20,13 +20,17 @@ function getItem(label, key, icon, children) {
 const items = [
   getItem('Home', '/home', <PieChartOutlined />),
   getItem('About', '/about', <DesktopOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [
-    getItem('Tom', '3'),
-    getItem('Bill', '4'),
+  getItem('Product', 'sub1', <UserOutlined />, [
+    getItem('product', '/product'),
+    getItem('Customer', '/customer'),
     getItem('Alex', '5'),
   ]),
 ];
 const MainLayout = () => {
+
+    // Declar 
+    const navigate = useNavigate();
+
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -35,7 +39,14 @@ const MainLayout = () => {
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={value => setCollapsed(value)}>
         <div className="demo-logo-vertical" />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+        <Menu
+            theme="dark"
+            defaultSelectedKeys={['1']}
+            mode="inline"
+            items={items}
+            // action route 
+            onClick={(item)=> navigate(item.key)}
+            />
       </Sider>
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }} />
@@ -52,9 +63,7 @@ const MainLayout = () => {
             <Outlet/>
           </div>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>
-          Ant Design ©{new Date().getFullYear()} Created by Ant UED
-        </Footer>
+
       </Layout>
     </Layout>
   );

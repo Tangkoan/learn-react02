@@ -8,6 +8,8 @@ import RegesterPage from './pages/auth/register/RegesterPage'
 import NotFound from './pages/404/404'
 import MainLayout from './components/layout/MainLayout'
 import MainLayoutLogin from './components/layout/MainLayoutLogin'
+import ProductPage from './pages/product/ProductPage'
+import CustomerPage from './pages/customer/CustomerPage'
 
 function App() {
 
@@ -17,6 +19,8 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/home" element={<HomePage/>}/>
           <Route path="/about" element={<AboutPage/>}/>
+          <Route path="/product" element={<ProductPage/>}/>
+          <Route path="/customer" element={<CustomerPage/>}/>
           <Route path="*" element={<NotFound/>}/>
         </Route>
 
