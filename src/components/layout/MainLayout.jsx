@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+import logo from '../../assets/images/logo.jpg'
+
+import { FcCustomerSupport } from "react-icons/fc";
+
+
 import {
   DesktopOutlined,
   FileOutlined,
@@ -22,7 +27,7 @@ const items = [
   getItem('About', '/about', <DesktopOutlined />),
   getItem('Product', 'sub1', <UserOutlined />, [
     getItem('product', '/product'),
-    getItem('Customer', '/customer'),
+    getItem('Customer', '/customer',<FcCustomerSupport />),
     getItem('Alex', '5'),
   ]),
 ];
@@ -49,7 +54,25 @@ const MainLayout = () => {
             />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }} />
+            <div className='header-main'>
+                <div className='text-main'>
+                    
+                        
+                    <div style={{display: 'flex'}}>
+                      <img src={logo} alt=''  className='logo'/>
+                      <div style={{paddingTop: 15, paddingLeft: 15}}>
+                        <h5>Online Shop</h5>
+                        <h5>Build Your Skill</h5>
+                      </div>
+                    </div>
+                  
+
+                    <div style={{paddingTop: 10}}>
+                        <h5>Vannchinh Kuy</h5>
+                        <h5>Super Admin</h5>
+                    </div>
+                </div>
+            </div>
         <Content style={{ margin: '0 16px' }}>
           <Breadcrumb style={{ margin: '16px 0' }} items={[{ title: 'User' }, { title: 'Bill' }]} />
           <div
@@ -70,37 +93,3 @@ const MainLayout = () => {
 };
 export default MainLayout;
 
-
-
-
-// import { Outlet,Link } from "react-router-dom";
-
-// const MainLayout = () => {
-
-//     return(
-//         <div style={{width: '100%', height: '60px',backgroundColor: "yellow"}}>
-//             <div style={{width: '100%',}}>
-//                 <div>Brand Name</div>
-//                 <div>
-//                     <Link to="/home">Home</Link>
-//                     <Link to="/about">About</Link>
-//                 </div>
-
-//                 {/* outlet នេះសម្រាប់បង្ហាញ Content Page */}
-//                 <div style={{backgroundColor: "green", height:"100px"}}>
-//                     <Outlet/>
-//                 </div>
-
-//                 {/* Footer */}
-//                 <div style={{ backgroundColor: "red", padding: 10}}>
-//                     <h1>Footer</h1>
-//                     <div>Facebook</div>
-//                     <div>Youtube</div>
-//                     <div>TikTok</div>
-//                 </div>
-//             </div>
-//         </div>
-//     )
-// }
-
-// export default MainLayout;
