@@ -21,3 +21,8 @@
     padding-left: 10px;
     padding-right: 10px;
 }
+
+.main-page-header {
+    justify-content: space-between;
+    display: flex;
+}

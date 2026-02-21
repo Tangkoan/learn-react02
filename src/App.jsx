@@ -10,6 +10,7 @@ import MainLayout from './components/layout/MainLayout'
 import MainLayoutLogin from './components/layout/MainLayoutLogin'
 import ProductPage from './pages/product/ProductPage'
 import CustomerPage from './pages/customer/CustomerPage'
+import RolePage from './pages/role/RolePage'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/home" element={<HomePage/>}/>
           <Route path="/about" element={<AboutPage/>}/>
+          <Route path="/role" element={<RolePage/>}/>
           <Route path="/product" element={<ProductPage/>}/>
           <Route path="/customer" element={<CustomerPage/>}/>
           <Route path="*" element={<NotFound/>}/>
