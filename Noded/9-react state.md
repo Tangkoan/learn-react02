@@ -64,7 +64,7 @@ export const RolePage = () => {
         <div className='main-page-header'>
             <Space>
             <div>Role , total<span  style={{color: 'red', fontWeight: 'bold'}}> {state.list.length}</span></div>
-            <Input.Search allowClear placeholder='Search...'/>
+            <Input.Search allowClear placeholder='Search...' />
             </Space>
             <Button type='primary'>New</Button>
         </div>

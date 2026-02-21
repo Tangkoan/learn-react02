@@ -1,3 +1,39 @@
+យើងរៀនបង្កើត Function 
+
+const onClickNew = () => {
+        // body function execute
+        // action create new record role
+        var objRole = {
+            id: 1,
+            name: "Tangkoan",
+            group: "Admin"
+        };
+        setState((p)=>({
+            ...p, // រក្សាទិន្នន័យចាស់គេកុំអោយបាត់បង់
+            list: [...p.list, objRole],
+        }));
+}
+
+// កូដក្នុង return()
+<Button type='primary' onClick={onClickNew}>New</Button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+កូដសម្រាប់មើលទាក់ទងការប្រើប្រាស់ state និង input data get data form user input
 import { Space, Input, Button } from 'antd';
 import React, { useState } from 'react';
 import { IoCloudOfflineOutline } from "react-icons/io5";
@@ -80,7 +116,7 @@ export const RolePage = () => {
         </h1>
 
         {/* Form Add New Role */}
-            <div style={{backgroundColor: "red", height: 80, padding: 20, borderRadius: 25}}>
+            <div>
                 <Space>
                     <Input placeholder='id' value={objRole.id} onChange={(event) => setObjRole((p)=> ({
                         ...p, id: event.target.value
