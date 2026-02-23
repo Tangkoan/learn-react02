@@ -1,24 +1,29 @@
-import React from 'react'
-import { countStore } from '../../store/configStore';
-import { Space, Input, Button, message, Modal } from 'antd';
+import React from 'react';
+import { productStore } from '../../store/productStore';
+
+import {Row, Col, Button} from "antd";
 
 export const ProductPage = () => {
 
-  const {count,category, increase, descrease,reset,update} = countStore();
+  const {list} = productStore();
+  
 
   return (
     <div>
-      <div>ProductPage</div>
-
-      <h1>Count: {count}</h1>
-
-    <br></br>
-      <Space>
-        <Button danger onClick={() => descrease()}>-</Button>
-        <Button type='primary' onClick={() => increase()}>+</Button>
-        <Button danger onClick={() => reset()}>Reset</Button>
-        <Button danger onClick={() => update(888)}>Change to 888</Button>
-      </Space>
+      <div>product</div>
+      <Row>
+        {list?.map((item, index)=>(
+          <Col key={index} xs={24} md={8} lg={6}>
+            <div style={{backgroundColor: "#eee", padding: 10, margin: 5}}>
+              <img src={item.image} style={{backgroundColor: "gray", width: "100%", height: 210, borderRadius: 15}}></img>
+              <div style={{fontWeight: "bold"}}>{item.name}</div>
+              <div>{item.des}</div>
+              <div>{item.price}$</div>
+              <Button type='primary'>Add To cart</Button>
+            </div>
+          </Col>
+        ))}
+      </Row>
     </div>
   )
 }
