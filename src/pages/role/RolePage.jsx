@@ -1,4 +1,4 @@
-import { Space, Input, Button } from 'antd';
+import { Space, Input, Button, message, Modal } from 'antd';
 import React, { useState } from 'react';
 import { IoCloudOfflineOutline } from "react-icons/io5";
 
@@ -49,20 +49,110 @@ export const RolePage = () => {
         name: "",
         group: ""
     });
+
+    const onClear = () => {
+        setObjRole((e)=>({
+            id: "",
+            name: "",
+            group: ""
+        }))
+    }
     
     const onSave = () => {
+
+        if(idEdit == null){
+            if(objRole.id == ""){
+            message.warning("Please fill id");
+            return
+        }else if(objRole.name == ""){
+            message.warning("Please fill name");
+            return
+        }else if(objRole.group == ""){
+            message.warning("Please fill group");
+            retrun
+        }
+
+        // Check Conditon ដើម្បីមើលថា​ ID ស្ទួនឬអត់
+        const indexFound = state.list.findIndex((item) => item.id == objRole.id);
+        if(indexFound != -1){
+            message.warning("id alredy exitst!!");
+            return;
+        }
+
+        // លក្ខខណ្ឌចុងក្រោយគឺ ដើរកូដខាងក្រោម
         setState((p)=>({
             ...p,
             list: [...p.list, objRole],
         }));
+
+        // clear when sumbit success
+        setObjRole((e)=>({
+            id: "",
+            name: "",
+            group: ""
+        }))
+        message.success("Add Success");
+        }
+        else{
+            // edit
+            var indexUpdate = state.list.findIndex((item)=>item.id == idEdit);
+            // state.list[indexUpdate].id = objRole.id;
+            state.list[indexUpdate].name = objRole.name;
+            state.list[indexUpdate].group = objRole.group;
+            setState((p)=>({
+                ...p,
+                list:[...state.list]
+            }));
+
+            setObjRole((p) => ({
+                id: "",
+                name: "",
+                group: ""
+            }));
+            setIdEdit(null);
+            message.success("Update Success");
+        }
     };
 
     const onClickNew = () => {
         // body function execute
-        // action create new record role
-        
+        // action create new record role        
+    }
+
+    const onDelete = (item, index) => {
 
         
+        // template ដែលមានស្រាប់ជាមួយ Form Confrim
+        Modal.confirm({
+            title: "Delete Data",
+            content: "Are you sure delete this data?",
+            onOk: () => {
+                 const newList = state.list.filter((data) => data.id != item.id);
+                setState((p)=>({
+                    ...p,
+                    list: newList,
+                }));
+                message.success("Delete success");
+            }
+        })
+    }
+
+    // ប្រកាស ID ក្លែងក្លាយសម្រាប់អាចអោយ Form ដឹងថាយើងកំពុងចង់ Edit មិនមែន Delete ទេ
+    const [idEdit, setIdEdit] = useState(null);
+
+    const onEdit = (item, index) => {
+
+        setIdEdit(item.id);
+
+        setObjRole((p) => ({
+            ...p,
+            ...item,
+            // ...item គឺមានអត្ថន័យថា
+            // id: item.id,
+            // name: item.name,
+            // group: item.group
+            // ទៅថ្ងៃខាងមុខបើមាន 10 គឺគេត្រូវហត់ក្នុងការប្ដូរ ចឹងយើងអាចសរសេរ ...item ទៅស្រួល
+        }))
     }
 
   return (
@@ -82,7 +172,7 @@ export const RolePage = () => {
         {/* Form Add New Role */}
             <div style={{backgroundColor: "red", height: 80, padding: 20, borderRadius: 25}}>
                 <Space>
-                    <Input placeholder='id' value={objRole.id} onChange={(event) => setObjRole((p)=> ({
+                    <Input disabled={idEdit ? true : false} placeholder='id' value={objRole.id} onChange={(event) => setObjRole((p)=> ({
                         ...p, id: event.target.value
                     }))}/>
                     <Input placeholder='name' value={objRole.name} 
@@ -96,7 +186,11 @@ export const RolePage = () => {
                         }))}
                     />
                 </Space>
-                <Button type='primary' onClick={onSave}>Save</Button>
+                <Button danger style={{marginLeft: 10}} onClick={onClear}>Clear</Button>
+                <Button type='primary' style={{marginLeft: 10}} onClick={onSave}>
+                    {/* ដាក់លក្ខខណ្ឌ */}
+                    {idEdit ? "Update" : "Save"}
+                </Button>
             </div>
         {/* End Add New Role */}
 
@@ -112,14 +206,15 @@ export const RolePage = () => {
                 <Space>
                     <div style={{width:40, height:40, borderRadius: 20, backgroundColor: 'gray'}}></div>
                     <div>
-                        <div>{item.name}</div>
-                        <div>{item.group}</div>
+                        <div> ID: {item.id}</div>
+                        <div> Name : {item.name}</div>
+                        <div>Group : {item.group}</div>
                     </div>
                 </Space>
                 <div style={{ textAlign: "right"}}>
                     <Space>
-                        <Button type='primary'>Edit</Button>
-                        <Button type='primary' danger>Delete</Button>
+                        <Button type='primary' onClick={() => onEdit(item, index)}>Edit</Button>
+                        <Button type='primary' danger onClick={() => onDelete(item, index)}>Delete</Button>
                     </Space>
                 </div>
             </div>
