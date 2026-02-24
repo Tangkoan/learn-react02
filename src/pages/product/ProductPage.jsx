@@ -8,7 +8,7 @@ import ProductCard from '../../components/product/ProductCard';
 
 export const ProductPage = () => {
 
-  const {list} = productStore();
+  const {list, hanleWislist} = productStore();
   const objP = {
     name: "Mackbook 2022",
     descriptions: "8GB 256Gb 14-inch M1",
@@ -16,36 +16,29 @@ export const ProductPage = () => {
     discount: 10,
     image: null,
   }
+
+  const onAddToBage = (item) =>{
+    console.log(item)
+  }
+
+  const onAddToWislist = (item) => {
+    hanleWislist(item);
+  }
   
 
   return (
     <div>
       <div>product</div>
-      {/* <Row>
-        {list?.map((item, index)=>(
-          <Col key={index} xs={24} md={8} lg={6}>
-            <div style={{backgroundColor: "#eee", padding: 10, margin: 5}}>
-              <img src={item.image} style={{backgroundColor: "gray", width: "100%", height: 210, borderRadius: 15}}></img>
-              <div style={{fontWeight: "bold"}}>{item.name}</div>
-              <div>{item.des}</div>
-              <div>{item.price}$</div>
-              <Button type='primary'>Add To cart</Button>
-            </div>
-          </Col>
-        ))}
-      </Row> */}
+      
 
       <Row>
         {list?.map((item, index)=>(
           <Col key={index} xs={24} md={8} lg={6}>
             <ProductCard
-              // name={item.name}
-              // description={item.des}
-              // price={item.price}
-              // image={item.image}
               {...item}
               description={item.des}
-
+              onAddToBage={()=> onAddToBage(item)}
+              onAddToWislist={()=> onAddToWislist(item)}
             />
           </Col>
         ))}
