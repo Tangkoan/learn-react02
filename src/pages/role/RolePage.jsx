@@ -223,7 +223,11 @@ export const RolePage = () => {
             footer={false}>
                 
             <Form layout='vertical' onFinish={onFinish} form={formRef}>
-                <Form.Item name={"name"} label="Role Name">
+                <Form.Item
+                    name={"name"} 
+                    label="Role Name" 
+                    rules={[{ required: true, message: 'Please Enter Role' }]}
+                >
                     <Input placeholder='Name' />
                 </Form.Item>
 
