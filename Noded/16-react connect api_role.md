@@ -4,6 +4,7 @@
 
 + ជំហានដំបូងគឺធ្វើការ ដំឡើង axios
 > npm install axios
+យើងបានដំឡើង floder util ដើម្បីបង្កើត File config.js and request.js ដើម្បី អោយ React connect to api
 
 
 --------------------------------------------------

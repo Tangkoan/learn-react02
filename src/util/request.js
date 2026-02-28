@@ -13,7 +13,14 @@ export const request = (url="", method="", data={}) => {
         }
     }).then(res=>{
         return res.data;
-    }).catch(error=>{
-        console.log(error);
-    })
+    }).catch(error => {
+        // ករណី Error (422, 401, 500...)
+        // យើងត្រូវ return ទិន្នន័យដែលមកពី Server (res.data)
+        if (error.response && error.response.data) {
+            return error.response.data; 
+        }
+        // បើដាច់ Internet ឬ Server ងាប់
+        return { status: "error", message: error.message };
+        // console.log(error);
+    });
 }
