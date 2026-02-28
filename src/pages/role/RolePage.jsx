@@ -58,8 +58,24 @@ export const RolePage = () => {
             code: item.code,
             status: item.status,
         }
+
+        // let url = "role";
+        // // let method = "post"
+        // if(!formRef.getFieldValue("id")){
+        //     url+="/"+formRef.getFieldValue("id");
+        //     // method = "put";
+        // }
+
+        const id = formRef.getFieldValue("id");
+        // បង្កើត Variable សម្រាប់ផ្ញើទៅ request
+        let url = "role";
+        if (id) {
+            url = "role/" + id; // លទ្ធផល: role/14 (ត្រូវជាមួយ Route: role/{id})
+        }
+
+
                                 // url,   methdo , param
-        const res = await request("role", "post", data);
+        const res = await request(url, "post", data);
         // console.log(res)
         // if(res && !res.error){
         //     message.success(res.message);
@@ -109,6 +125,22 @@ export const RolePage = () => {
         })
     }
 
+    const handleEdit = (data) => {
+        // alert(JSON.stringify(data))
+        
+        formRef.setFieldsValue({
+            ...data,
+            id: data.id,
+            // name: data.name
+            // code : data.code គឺគេមិនចង់សរសេរច្រើនដងគេប្រើ 
+        });
+
+        setState((p)=>({
+                ...p,
+                open: true,
+        }));
+    }
+
     
 
   return (
@@ -120,6 +152,8 @@ export const RolePage = () => {
             </Space>
             <Button type='primary' onClick={handleOpenModal}>New</Button>
         </div>
+
+        <h1>{formRef.getFieldValue("id")+ ""} </h1>
 
         <Table 
             rowKey="id"
@@ -171,7 +205,7 @@ export const RolePage = () => {
                     dataIndex: "id",
                     render: (value, data) => (
                         <Space>
-                            <Button type='primary'>Edit</Button>
+                            <Button type='primary' onClick={()=> handleEdit(data)}>Edit</Button>
                             <Button danger type='primary' onClick={()=> handleDelete(data)}>Delete</Button>
                         </Space>
                     )
@@ -181,7 +215,13 @@ export const RolePage = () => {
             ]}
         />
 
-        <Modal title="New Role" open={state.open} onCancel={handleCloseModal} footer={false}>
+        <Modal 
+            // title="New Role"
+            title={formRef.getFieldValue("id") ? "Update Role" : "New Role"}
+            open={state.open}
+            onCancel={handleCloseModal}
+            footer={false}>
+                
             <Form layout='vertical' onFinish={onFinish} form={formRef}>
                 <Form.Item name={"name"} label="Role Name">
                     <Input placeholder='Name' />
@@ -214,7 +254,7 @@ export const RolePage = () => {
                 <div style={{textAlign: 'right'}}>
                     <Space >
                         <Button danger type='primary' onClick={handleCloseModal}>Cancel</Button>
-                        <Button type='primary' htmlType='sumbit'>Save</Button>
+                        <Button type='primary' htmlType='sumbit'>{formRef.getFieldValue("id") ? "Update" : "Save"}</Button>
                     </Space>
                 </div>
                 
