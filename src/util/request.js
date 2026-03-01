@@ -14,6 +14,8 @@ export const request = (url="", method="", data={}) => {
     }).then(res=>{
         return res.data;
     }).catch(error => {
+        console.log(error);
+
         // ករណី Error (422, 401, 500...)
         // យើងត្រូវ return ទិន្នន័យដែលមកពី Server (res.data)
         if (error.response && error.response.data) {

@@ -20,12 +20,34 @@ export const RolePage = () => {
 
     });
 
+    const [filter, setFilter] = useState({
+        text_search: "",
+        status: "",
+    })
+
     useEffect(() => {
         getList();
     }, [])
 
     const getList = async () => {
-        const res = await request("role", "get")
+
+        // កូដដែលត្រូវបន្ដការងារ search (filter)
+        let query_param = "?page=1";
+        
+    
+        // កូដដែលត្រូវបន្ដការងារ search (filter)
+        if(filter.text_search !== null && filter.text_search !== ""){
+            query_param += "&text_search="+filter.text_search
+        }
+        // ឆែក status (ប្រើវិធីនេះដើម្បីការពារ undefined, null, និង string ទទេ)
+        // យើងឆែក !== undefined និង !== null ដើម្បីឱ្យលេខ 0 នៅតែអាចផ្ញើទៅបាន (បើ status ជាលេខ)
+        if (filter.status !== undefined && filter.status !== null && filter.status !== "") {
+            query_param += "&status=" + filter.status;
+        }
+
+        const res = await request("role" + query_param, "get")
+
+        // const res = await request("role", "get")
         // console.log(res)
         if(res) {
             setState((pre)=>({
@@ -33,6 +55,9 @@ export const RolePage = () => {
                 list:res.data,  // res.data ព្រោះ api មិនមែនបស់ជា [] ទេគឺបស់ជា {data:[{}]} មកពីវាបស់ជា obj ដែលទិន្នន័យស្ថិតក្នុង data ទើប res ត្រូវសរសេរជា res.data
             }));
         }
+
+        
+
     };
 
     const handleOpenModal = () => {
@@ -141,15 +166,40 @@ export const RolePage = () => {
         }));
     }
 
+    const handleFilter = () => {
+        getList();
+    }
+
     
 
   return (
     <div>
         <div className='main-page-header'>
+            <h1>{filter.text_search}-{filter.status}</h1>
             <Space>
             <div>Role <span  style={{color: 'red', fontWeight: 'bold'}}> {state.list.length}</span></div>
-            <Input.Search allowClear placeholder='Search...'/>
+            <Input.Search allowClear placeholder='Search...'onChange={(e)=>setFilter(p=>({...p,text_search:e.target.value}))}/>
+            <Select
+                style={{width: 130}}
+                allowClear={true}
+                placeholder="Select Status"
+                options={[
+                    {
+                        label: "Active",
+                        value: 1,
+                    },
+                    {
+                        label: "Disble",
+                        value: 0,
+                    }
+                ]}
+                onChange={(value)=>setFilter(p=>({...p,status:value}))}
+            />
+            <Button type='primary' onClick={handleFilter}>Filter</Button>
             </Space>
+
+            
+
             <Button type='primary' onClick={handleOpenModal}>New</Button>
         </div>
 
