@@ -24,13 +24,23 @@ function getItem(label, key, icon, children) {
 }
 const items = [
   getItem('Home', '/home', <PieChartOutlined />),
-  getItem('About', '/about', <DesktopOutlined />),
   getItem('Role', '/role', <DesktopOutlined />),
-  getItem('Category', '/category', <DesktopOutlined />),
+  // getItem('Category', '/category', <DesktopOutlined />),
   getItem('Product', 'sub1', <UserOutlined />, [
     getItem('product', '/product'),
-    getItem('Customer', '/customer',<FcCustomerSupport />),
-    getItem('Alex', '5'),
+    getItem('Category', '/category',<FcCustomerSupport />),
+    // getItem('Alex', '5'),
+  ]),
+
+  getItem('User', 'user', <UserOutlined />, [
+    getItem('User', '/user'),
+    getItem('Role', '/role',),
+    getItem('Permission', '/permission',),
+  ]),
+
+  getItem('Setting', 'setting', <UserOutlined />, [
+    getItem('User', '/user'),
+    getItem('Role', '/role',),
   ]),
 ];
 const MainLayout = () => {
