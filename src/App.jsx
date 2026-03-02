@@ -11,6 +11,7 @@ import MainLayoutLogin from './components/layout/MainLayoutLogin'
 import ProductPage from './pages/product/ProductPage'
 import CustomerPage from './pages/customer/CustomerPage'
 import RolePage from './pages/role/RolePage'
+import CategoryPage from './pages/category/CategoryPage'
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/role" element={<RolePage/>}/>
           <Route path="/product" element={<ProductPage/>}/>
           <Route path="/customer" element={<CustomerPage/>}/>
+          <Route path="/category" element={<CategoryPage/>}/>
           <Route path="*" element={<NotFound/>}/>
         </Route>
 

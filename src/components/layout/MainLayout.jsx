@@ -26,6 +26,7 @@ const items = [
   getItem('Home', '/home', <PieChartOutlined />),
   getItem('About', '/about', <DesktopOutlined />),
   getItem('Role', '/role', <DesktopOutlined />),
+  getItem('Category', '/category', <DesktopOutlined />),
   getItem('Product', 'sub1', <UserOutlined />, [
     getItem('product', '/product'),
     getItem('Customer', '/customer',<FcCustomerSupport />),
