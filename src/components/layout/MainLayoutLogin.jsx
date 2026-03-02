@@ -4,7 +4,7 @@ const MainLayoutLogin = () => {
 
     return(
         <div style={{width: '100%', height: '100%'}}>
-            <div style={{ backgroundColor: "red", padding: 10}}>
+            <div style={{ padding: 10}}>
                 <div>Welecome Login Or Regester</div>
                 <div>
                     <Link to="/">Login</Link>
