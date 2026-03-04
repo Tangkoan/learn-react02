@@ -54,7 +54,8 @@ export const profileStore = create()(
     }),
     {
       name: 'profile', // name of the item in the storage (must be unique)
-      storage: createJSONStorage(() => sessionStorage), // (optional) by default, 'localStorage' is used
+      // storage: createJSONStorage(() => sessionStorage), // (optional) by default, 'localStorage' is used
+      storage: createJSONStorage(() => localStorage), // 👈 ប្ដូរទីនេះ
     },
   ),
 )
