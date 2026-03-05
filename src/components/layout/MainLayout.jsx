@@ -3,8 +3,8 @@ import logo from '../../assets/images/logo.jpg'
 
 import { FcCustomerSupport } from "react-icons/fc";
 
-import { DownOutlined, SmileOutlined } from '@ant-design/icons';
-import { Dropdown, Space } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+import { Dropdown, Space,Avatar } from 'antd';
 
 
 
@@ -130,11 +130,26 @@ const MainLayout = () => {
                           
                           >
                           <Space>
-                            <div style={{paddingTop: 10}}>
-                                <h5>{profile?.name}</h5>
+
+                          {/* <img src={profile.image} alt="" style={{width: 40, height: 40, marginTop: 10, borderRadius: 20, borderBlockColor: "red"}} /> */}
+                          {/* ដោយសារយើងប្រើ Antd */}
+                          
+                          {/* ករនី API មិនបាន doamin/path អោយយើង */}
+                          {/* <img src={config.image_path + profile?.image} alt="" style={{width: 40, height: 40, marginTop: 10, borderRadius: 20, borderBlockColor: "red"}} /> */}
+
+                            <div style={{paddingTop: 10, display: 'flex',}}>
+                               <h5 style={{marginTop: 10, marginRight: 10, color: 'black', fontWeight: 'bold'}}>{profile?.name}</h5>
+                              <Avatar 
+                                  size={40} 
+                                  src={profile?.image} 
+                                  icon={<UserOutlined />} // បើអត់មានរូបភាព វានឹងបង្ហាញ Icon រូបមនុស្សនេះ
+                                  
+                              />
                                 <h5>{profile?.role}</h5>
                             </div>
-                            <DownOutlined />
+                            <DownOutlined style={{color: 'black'}}/>
+
+                           
                           </Space>
                         </a>
                       </Dropdown>
