@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { profileStore } from '../../../store/profileStore';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Outlet,Link } from 'react-router-dom';
 import { request } from "../../../util/request";
 
 
@@ -87,6 +87,9 @@ const LoginPage = () => {
                         Submit
                     </Button>
                 </Form.Item>
+                <div>
+                    <Link to="/regester">Register</Link>
+                </div>
             </Form>
         </div>
     );

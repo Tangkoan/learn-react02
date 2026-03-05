@@ -8,6 +8,15 @@ export const request = (url="", method="", data={}) => {
     // let {setAccessToken} = profileStore().getState();
     const { access_token } = profileStore.getState();
 
+    let headers = {
+        "Content-Type" : "application/json",
+    };
+    if(data instanceof FormData){
+        headers = {
+            "Content-Type" : "multipart/form-data",
+        };
+    }
+
     // url="role/search";
     return axios({
         url: config.base_url + url,
@@ -15,8 +24,8 @@ export const request = (url="", method="", data={}) => {
         data : data,
         headers : {
             Accept : "application/json",
-            "Content-Type" : "application/json",
-
+            // "Content-Type" : "application/json",
+            ...headers,
             Authorization: "Bearer" + access_token,
             // "Authorization": access_token ? `Bearer ${access_token}` : "",
         }
