@@ -8,6 +8,9 @@ export const request = (url="", method="", data={}) => {
     // let {setAccessToken} = profileStore().getState();
     const { access_token } = profileStore.getState();
 
+    // 🚩 ឆែកមើលថា តើមាន Token ចេញពី Store មកពិតប្រាកដទេ?
+    // console.log("Current Token in Store:", access_token);
+
     let headers = {
         "Content-Type" : "application/json",
     };
@@ -26,8 +29,8 @@ export const request = (url="", method="", data={}) => {
             Accept : "application/json",
             // "Content-Type" : "application/json",
             ...headers,
-            Authorization: "Bearer" + access_token,
-            // "Authorization": access_token ? `Bearer ${access_token}` : "",
+            // Authorization: "Bearer" + access_token,
+            "Authorization": access_token ? `Bearer ${access_token}` : "",
         }
     }).then(res=>{
         return res.data;

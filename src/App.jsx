@@ -12,6 +12,7 @@ import ProductPage from './pages/product/ProductPage'
 import CustomerPage from './pages/customer/CustomerPage'
 import RolePage from './pages/role/RolePage'
 import CategoryPage from './pages/category/CategoryPage'
+import BrandPage from './pages/brand/BrandPage'
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="/product" element={<ProductPage/>}/>
           <Route path="/customer" element={<CustomerPage/>}/>
           <Route path="/category" element={<CategoryPage/>}/>
+          <Route path="/brand" element={<BrandPage/>}/>
           <Route path="*" element={<NotFound/>}/>
         </Route>
 

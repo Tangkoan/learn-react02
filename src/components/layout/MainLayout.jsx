@@ -33,6 +33,7 @@ const items = [
   // getItem('Category', '/category', <DesktopOutlined />),
   getItem('Product', 'sub1', <UserOutlined />, [
     getItem('product', '/product'),
+    getItem('brand', '/brand'),
     getItem('Category', '/category',<FcCustomerSupport />),
     // getItem('Alex', '5'),
   ]),
